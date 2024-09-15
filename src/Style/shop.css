@@ -1,0 +1,114 @@
+/* Style for Filter Widget (Combo Box) */
+.filter__widget .custom-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    appearance: none;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23333" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+}
+
+.custom-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.custom-select option {
+    padding: 10px;
+}
+
+.custom-select::-ms-expand {
+    display: none;
+    /* Remove the default dropdown icon in IE */
+}
+
+/* Style for Search Box */
+.search__box {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    /* Restrict maximum width */
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search__box input {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    /* Extra space for the icon */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    /* Rounded corners */
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search__box input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search__box span {
+    position: absolute;
+    right: 10px;
+    /* Positioning the icon on the right */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.search__box span:hover {
+    color: #007bff;
+}
+
+/* Gaya untuk tampilan responsif di bawah 768px */
+@media (max-width: 768px) and (max-width: 992px) {
+
+    /* Mengatur jarak untuk elemen filter widget */
+    .filter__widget {
+        margin-bottom: 15px;
+        /* Menambah jarak bawah antar elemen */
+    }
+
+    /* Mengatur jarak untuk search box */
+    .search__box {
+        margin-bottom: 15px;
+        /* Menambah jarak bawah */
+        justify-content: center;
+        /* Pusatkan elemen di layar kecil */
+    }
+
+    /* Mengatur padding agar elemen tidak terlalu berjarak */
+    .custom-select {
+        padding: 6px;
+        font-size: 14px;
+        /* Font lebih kecil untuk layar sempit */
+    }
+
+    /* Menyempitkan search input pada layar kecil */
+    .search__box input {
+        padding: 6px 20px 6px 10px;
+        /* Kurangi padding untuk ukuran lebih kecil */
+        font-size: 14px;
+    }
+
+    /* Mengurangi ukuran ikon pencarian pada layar kecil */
+    .search__box span i {
+        font-size: 16px;
+        /* Sesuaikan ukuran ikon */
+    }
+}

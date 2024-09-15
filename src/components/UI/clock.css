@@ -1,0 +1,85 @@
+/* Max-width 992px (Tablet) */
+@media only screen and (max-width: 992px) {
+    .clock__wrapper {
+        margin: 10px 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        /* Membuat elemen bisa membungkus saat ruang kurang */
+    }
+
+    .clock__data {
+        margin-bottom: 15px;
+        /* Tambahkan margin bawah untuk jarak antar elemen */
+    }
+
+    .clock__data h1 {
+        font-size: 1.5rem;
+    }
+
+    .clock__data h5 {
+        font-size: 1.2rem;
+    }
+
+    .clock__data span {
+        font-size: 1.8rem;
+    }
+}
+
+/* Max-width 768px (Mobile - landscape) */
+@media only screen and (max-width: 768px) {
+    .clock__wrapper {
+        margin: 10px 0;
+        justify-content: center;
+        gap: 10px;
+        /* Kurangi gap agar lebih kompak */
+        flex-wrap: wrap;
+    }
+
+    .clock__data {
+        margin-bottom: 10px;
+    }
+
+    .clock__data h1 {
+        font-size: 1.2rem;
+        /* Ukuran lebih kecil untuk mobile */
+    }
+
+    .clock__data h5 {
+        font-size: 1rem;
+    }
+
+    .clock__data span {
+        font-size: 1.5rem;
+    }
+}
+
+/* Max-width 360px (Small screens like mobile) */
+@media only screen and (max-width: 360px) {
+    .clock__wrapper {
+        margin: 20px 0;
+        justify-content: center;
+        gap: 5px;
+        /* Kurangi gap lebih kecil */
+    }
+
+    .clock__data {
+        text-align: center;
+        margin-bottom: 6px;
+        /* Mengurangi jarak antara elemen */
+    }
+
+    .clock__data h1 {
+        font-size: 0.9rem;
+        /* Ukuran lebih kecil untuk angka */
+    }
+
+    .clock__data h5 {
+        font-size: 0.7rem;
+        /* Ukuran lebih kecil untuk label seperti Days, Hours */
+    }
+
+    .clock__data span {
+        font-size: 1rem;
+        /* Ukuran lebih kecil untuk tanda titik dua (:) */
+    }
+}
