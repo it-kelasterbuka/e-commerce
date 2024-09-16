@@ -26,15 +26,17 @@ const ProdukCard = ({ item }) => {
     <Col lg="3" md="4">
       <div className="product__item">
         <div className="product__img">
-          <motion.img
-            whileHover={{ scale: 0.9 }}
-            src={item.imgUrl}
-            alt="img produk"
-          />
+          <Link to={`/shop/${item.id}`}>
+            <motion.img
+              whileHover={{ scale: 0.9 }}
+              src={item.imgUrl}
+              alt="img produk"
+            />
+          </Link>
         </div>
         <div className="product__info">
           <h3 className="product__name">
-            <Link to={`/shope/${item.id}`}>{item.productName}</Link>
+            <Link to={`/shop/${item.id}`}>{item.productName}</Link>
           </h3>
           <span className="d-block">{item.category}</span>
         </div>

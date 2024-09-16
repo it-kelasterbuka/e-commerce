@@ -29,7 +29,9 @@ import productImg23 from "../images/wireless-01.png";
 import productImg25 from "../images/wireless-03.png";
 
 import productImg26 from "../images/produk-tes-1.jpg";
-
+import productImg98 from "../images/produk-tes-1.jpg";
+import productImg99 from "../images/produk-tes-1.jpg";
+import productImg100 from "../images/produk-tes-1.jpg";
 const products = [
   {
     id: "01",
@@ -554,7 +556,7 @@ const products = [
   {
     id: "24",
     productName: "Ril 2 Fishing",
-    imgUrl: productImg26,
+    imgUrl: productImg98,
     category: "rill",
     price: 200000,
     shortDesc:
@@ -575,9 +577,9 @@ const products = [
   },
 
   {
-    id: "25",
+    id: "99",
     productName: "Ril 3 Fishing",
-    imgUrl: productImg26,
+    imgUrl: productImg99,
     category: "rill",
     price: 200000,
     shortDesc:
@@ -598,9 +600,9 @@ const products = [
   },
 
   {
-    id: "26",
+    id: "100",
     productName: "Ril 4 Fishing",
-    imgUrl: productImg26,
+    imgUrl: productImg100,
     category: "rill",
     price: 200000,
     shortDesc:
