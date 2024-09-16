@@ -8,10 +8,17 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import { motion } from "framer-motion";
 import ProductsList from "../components/UI/ProdukList";
+import { useDispatch } from "react-redux";
+import { cartAction } from "../redux/slices/cartSlice";
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const sectionRef = useRef(null);
   const [tab, setTab] = useState("desc");
+  const reviewUser = useRef("");
+  const reviewMsg = useRef("");
+  const dispatch = useDispatch();
+  const [rating, setRating] = useState(null);
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -33,6 +40,31 @@ const ProductDetails = () => {
   } = product;
 
   const relatedProducts = products.filter((item) => item.category === category);
+
+  const submitHendler = (e) => {
+    e.preventDefault();
+    const reviewUserName = reviewUser.current.value;
+    const reviewUserMsg = reviewMsg.current.value;
+
+    const reviewObj = {
+      userName: reviewUserName,
+      text: reviewUserMsg,
+      rating,
+    };
+    toast.success("Review submit");
+  };
+
+  const addToCart = () => {
+    dispatch(
+      cartAction.addItem({
+        id,
+        imgUrl: imgUrl,
+        productName,
+        price,
+      })
+    );
+    toast.success("Product added to cart successfully");
+  };
   return (
     <Helmet>
       <CommonSection title={productName} />
@@ -48,22 +80,52 @@ const ProductDetails = () => {
                 <h2>{productName}</h2>
                 <div className="product__rating">
                   <div>
-                    <span>
+                    <motion.span
+                      whileTap={{ scale: 1.3 }}
+                      onClick={() => setRating(1)}
+                    >
                       <i class="ri-star-s-fill"></i>
+                    </motion.span>
+                    <motion.span
+                      whileTap={{ scale: 1.3 }}
+                      onClick={() => setRating(2)}
+                    >
                       <i class="ri-star-s-fill"></i>
+                    </motion.span>
+                    <motion.span
+                      whileTap={{ scale: 1.3 }}
+                      onClick={() => setRating(3)}
+                    >
                       <i class="ri-star-s-fill"></i>
+                    </motion.span>
+                    <motion.span
+                      whileTap={{ scale: 1.3 }}
+                      onClick={() => setRating(4)}
+                    >
                       <i class="ri-star-s-fill"></i>
+                    </motion.span>
+                    <motion.span
+                      whileTap={{ scale: 1.3 }}
+                      onClick={() => setRating(5)}
+                    >
                       <i class="ri-star-half-s-line"></i>
-                    </span>
+                    </motion.span>
                   </div>
                   <p>
                     (<span>{avgRating}</span>Ratings)
                   </p>
                 </div>
-                <span className="product__price">{price}</span>
+                <div className="d-flex align-items-center gap-3">
+                  <span className="product__price">{price}</span>
+                  <span>Category : {category.toUpperCase()}</span>
+                </div>
                 <p className="mt-3">{shortDesc}</p>
 
-                <motion.button whileTap={{ scale: 1.2 }} className="buy__btn">
+                <motion.button
+                  whileTap={{ scale: 1.2 }}
+                  className="buy__btn"
+                  onClick={addToCart}
+                >
                   Add To Cart
                 </motion.button>
               </div>
@@ -110,9 +172,14 @@ const ProductDetails = () => {
 
                     <div className="review__form">
                       <h4>Provide value to the product</h4>
-                      <form action="">
+                      <form action="" onSubmit={submitHendler}>
                         <div className="form__group">
-                          <input type="text" placeholder="Enter Name" />
+                          <input
+                            type="text"
+                            placeholder="Enter Name"
+                            ref={reviewUser}
+                            required
+                          />
                         </div>
                         <div className="form__group d-flex align-items-center gap-3">
                           <span>
@@ -134,9 +201,11 @@ const ProductDetails = () => {
 
                         <div className="form__group">
                           <textarea
+                            ref={reviewMsg}
                             rows={4}
                             type="text"
                             placeholder="Review Message..."
+                            required
                           />
                         </div>
 

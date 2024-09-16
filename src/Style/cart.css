@@ -1,0 +1,22 @@
+.table tr td img{
+    width: 40px !important;
+    height: 40px !important;
+    text-align: center;
+    display: flex;
+    margin: 5px 0px;
+    object-fit: cover;
+}
+
+td p {
+    font-size: 1.3;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 10px 0px;
+}
+
+td i{
+    cursor: pointer;
+    color: red;
+    font-size: 1.5rem;
+    margin: 5px 5px;
+}

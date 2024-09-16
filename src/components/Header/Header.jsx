@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 
 import { motion } from "framer-motion";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import "./header.css";
 
 import logo from "../../assets/images/eco-logo.png";
@@ -29,6 +29,8 @@ const Header = () => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const Navigate = useNavigate();
+
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -47,6 +49,10 @@ const Header = () => {
   });
 
   const menuToggle = () => menuRef.current.classList.toggle("nav__active");
+
+  const navigateToCart = () => {
+    Navigate("/cart");
+  };
   return (
     <header ref={headerRef}>
       <Container className="header__container">
@@ -81,7 +87,11 @@ const Header = () => {
                 <i class="ri-heart-line"></i>
                 <span className="badge">1</span>
               </motion.span>
-              <motion.span whileTap={{ scale: 1.1 }} className="cart__icon">
+              <motion.span
+                whileTap={{ scale: 1.1 }}
+                className="cart__icon"
+                onClick={navigateToCart}
+              >
                 <i class="ri-shopping-cart-line"></i>
                 <span className="badge">{totalQuantity}</span>
               </motion.span>
