@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "../Style/cart.css";
 
 import Helmet from "../components/Helmet/Helmet";
@@ -9,36 +9,44 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 
 const Cart = () => {
+  const sectionRef = useRef(null);
+  useEffect(() => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
   const cartItems = useSelector((state) => state.cart.cartItems);
   return (
     <Helmet title={"Cart"}>
       <CommonSection title={"Shopping Cart"} />
 
-      <section>
+      <section ref={sectionRef}>
         <Container>
           <Row>
-            <Col lg="9">
+            <Col lg="12">
               {cartItems.length === 0 ? (
                 <h2 className="fs-4 text-center my-3">
                   Not item products, to the cart
                 </h2>
               ) : (
-                <table className="table bordered">
-                  <thead>
-                    <tr>
-                      <th>Image</th>
-                      <th>Title</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cartItems.map((item, index) => (
-                      <ListCartItemProducts item={item} key={index} />
-                    ))}
-                  </tbody>
-                </table>
+                <div className="table-responsive">
+                  <table className="table bordered">
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartItems.map((item, index) => (
+                        <ListCartItemProducts item={item} key={index} />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )}
             </Col>
             <Col lg="3"></Col>
@@ -66,7 +74,7 @@ const ListCartItemProducts = ({ item }) => {
         <p>Rp.{item.price}</p>
       </td>
       <td>
-        <p>{item.quantity}</p>
+        <p>{item.quantity}1</p>
       </td>
       <motion.td whileTap={{ scale: 1.1 }}>
         <span>

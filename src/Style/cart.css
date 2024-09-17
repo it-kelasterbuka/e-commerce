@@ -1,22 +1,97 @@
-.table tr td img{
+/* Agar tabel bisa di-scroll pada layar kecil */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    /* Menambahkan scroll horizontal */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling untuk perangkat mobile */
+}
+
+.table {
+    width: 100%;
+    /* Pastikan tabel lebar penuh */
+    table-layout: auto;
+    /* Otomatis menyesuaikan lebar kolom */
+}
+
+/* Gaya umum untuk gambar dalam tabel */
+.table tr td img {
     width: 40px !important;
     height: 40px !important;
-    text-align: center;
-    display: flex;
-    margin: 5px 0px;
     object-fit: cover;
+    margin: 5px 0;
+    display: block;
 }
 
+/* Gaya umum untuk teks dalam tabel */
 td p {
-    font-size: 1.3;
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--primary-color);
-    margin: 10px 0px;
+    margin: 10px 0;
 }
 
-td i{
+/* Gaya umum untuk ikon */
+td i {
     cursor: pointer;
     color: red;
     font-size: 1.5rem;
     margin: 5px 5px;
+}
+
+/* Media queries untuk resolusi max-width 768px */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table tr td img {
+        width: 30px !important;
+        height: 30px !important;
+        margin: 3px 0;
+    }
+
+    td p {
+        font-size: 1.1rem;
+        margin: 8px 0;
+    }
+
+    td i {
+        font-size: 1.2rem;
+        margin: 3px 3px;
+    }
+
+    .table tr th,
+    .table tr td {
+        padding: 6px;
+    }
+}
+
+/* Media queries untuk resolusi max-width 359px */
+@media (max-width: 359px) {
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table tr td img {
+        width: 25px !important;
+        height: 25px !important;
+        margin: 2px 0;
+    }
+
+    td p {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+
+    td i {
+        font-size: 1rem;
+        margin: 2px 2px;
+    }
+
+    .table tr th,
+    .table tr td {
+        padding: 4px;
+    }
 }
