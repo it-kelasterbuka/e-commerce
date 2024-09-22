@@ -6,35 +6,44 @@ import "../Style/home.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import Products from "../assets/data/products";
+// import Products from "../assets/data/products";
 import Service from "../Service/Service";
 import ProdukList from "../components/UI/ProdukList";
 import counterImg from "../assets/images/produk-tes-1-removebg-preview.png";
 import Clock from "../components/UI/Clock";
+import useGetDataProduct from "../hooks/useGetDataProduct";
 
 const Home = () => {
+  const { data: Product } = useGetDataProduct("products");
   const [trendingProductData, setTrendingProductData] = useState([]);
   const [bestSelesProductData, setBestSelesProductData] = useState([]);
   const [PopularProductData, setPopularProductData] = useState([]);
   const year = new Date().getFullYear();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const filterdTrendingProducts = Products.filter(
+    if (Product) {
+      setLoading(false);
+    }
+  }, [Product]);
+
+  useEffect(() => {
+    const filterdTrendingProducts = Product.filter(
       (item) => item.category === "rill"
     );
 
-    const filterdBestSelesProducts = Products.filter(
+    const filterdBestSelesProducts = Product.filter(
       (item) => item.category === "sofa"
     );
 
-    const filterdPopularProducts = Products.filter(
+    const filterdPopularProducts = Product.filter(
       (item) => item.category === "mobile"
     );
 
     setTrendingProductData(filterdTrendingProducts);
     setBestSelesProductData(filterdBestSelesProducts);
     setPopularProductData(filterdPopularProducts);
-  }, []);
+  }, [Product]);
 
   return (
     <Helmet title={"Home"}>
@@ -79,7 +88,11 @@ const Home = () => {
               <h2 className="section__title">Trending Products</h2>
             </Col>
             {/* Folder UI Product List */}
-            <ProdukList data={trendingProductData} />
+            {loading ? (
+              <h5 className="fw-bold">Loading...</h5>
+            ) : (
+              <ProdukList data={trendingProductData} />
+            )}
           </Row>
         </Container>
       </section>
@@ -91,7 +104,11 @@ const Home = () => {
               <h2 className="section__title">Best Seles</h2>
             </Col>
             {/* Folder UI Product List */}
-            <ProdukList data={bestSelesProductData} />
+            {loading ? (
+              <h5 className="fw-bold">Loading...</h5>
+            ) : (
+              <ProdukList data={bestSelesProductData} />
+            )}
           </Row>
         </Container>
       </section>
@@ -125,7 +142,11 @@ const Home = () => {
               <h2 className="section__title">Popular Products</h2>
             </Col>
             {/* Folder UI Product List */}
-            <ProdukList data={PopularProductData} />
+            {loading ? (
+              <h5 className="fw-bold">Loading...</h5>
+            ) : (
+              <ProdukList data={PopularProductData} />
+            )}
           </Row>
         </Container>
       </section>

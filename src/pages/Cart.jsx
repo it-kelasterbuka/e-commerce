@@ -7,6 +7,7 @@ import { Container, Row, Col } from "reactstrap";
 import { cartAction } from "../redux/slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const sectionRef = useRef(null);
@@ -16,6 +17,7 @@ const Cart = () => {
     }
   }, []);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
   return (
     <Helmet title={"Cart"}>
       <CommonSection title={"Shopping Cart"} />
@@ -23,7 +25,7 @@ const Cart = () => {
       <section ref={sectionRef}>
         <Container>
           <Row>
-            <Col lg="12">
+            <Col lg="9">
               {cartItems.length === 0 ? (
                 <h2 className="fs-4 text-center my-3">
                   Not item products, to the cart
@@ -49,7 +51,25 @@ const Cart = () => {
                 </div>
               )}
             </Col>
-            <Col lg="3"></Col>
+            <Col lg="3">
+              <div>
+                <h6 className="d-flex align-items-center justify-content-between">
+                  Subtotal :
+                  <span className="fs-4 fw-bold">Rp.{totalAmount}</span>
+                </h6>
+                <p className="fs-6 mt-2">
+                  Pajak dan pengiriman akan dihitung di checkout
+                </p>
+                <div>
+                  <button className="buy__btn w-100">
+                    <Link to={"/checkout"}>Checkout</Link>
+                  </button>
+                  <button className="buy__btn w-100">
+                    <Link to={"/shop"}>Continue Shopping</Link>
+                  </button>
+                </div>
+              </div>
+            </Col>
           </Row>
         </Container>
       </section>

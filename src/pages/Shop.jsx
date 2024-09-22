@@ -1,43 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import "../Style/shop.css";
 
-import products from "../assets/data/products";
+// import products from "../assets/data/products";
 import ProductsList from "../components/UI/ProdukList";
 
+//Firebase import
+import { db } from "../firebase.config";
+import { collection, getDocs } from "firebase/firestore";
+
 const Shop = () => {
-  const [productsData, setProductsData] = useState(products);
+  const [productsData, setProductsData] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+
+  // Mengambil data produk dari Firestore
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsCollection = collection(db, "products");
+      const productSnapshot = await getDocs(productsCollection);
+      const productList = productSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setProductsData(productList);
+      setAllProducts(productList); // Simpan semua produk
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
-    if (filterValue === "rill") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "rill"
+    if (
+      filterValue === "rill" ||
+      filterValue === "mobile" ||
+      filterValue === "sofa"
+    ) {
+      const filteredProducts = allProducts.filter(
+        (item) => item.category === filterValue
       );
-
       setProductsData(filteredProducts);
-    } else if (filterValue === "mobile") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "mobile"
-      );
-
-      setProductsData(filteredProducts);
-    } else if (filterValue === "chair") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "chair"
-      );
-
-      setProductsData(filteredProducts);
+    } else {
+      setProductsData(allProducts); // Kembali ke semua produk jika filter tidak cocok
     }
   };
 
   const handleSearch = (e) => {
     const searchProduct = e.target.value;
 
-    const searchProducts = products.filter((item) =>
+    const searchProducts = allProducts.filter((item) =>
       item.productName.toLowerCase().includes(searchProduct.toLowerCase())
     );
 
@@ -52,10 +66,10 @@ const Shop = () => {
             <Col lg="3" md="3">
               <div className="filter__widget">
                 <select class="custom-select" onChange={handleFilter}>
-                  <option>Filter By Category</option>
+                  <option value="all">Filter By Category</option>
                   <option value="rill">Rill</option>
                   <option value="mobile">Mobile</option>
-                  <option value="chair">Chair</option>
+                  <option value="sofa">Sofa</option>
                 </select>
               </div>
             </Col>

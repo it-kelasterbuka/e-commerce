@@ -1,19 +1,19 @@
 .hero__section{
-    background: var(--hero-bg);
+    background-color: #1ac6ff;
     padding: 60px 0;
-    color: #fff;
+    color: #000;
     position: relative;
 }
 
 .hero__content h1 {
-    color: var(--primary-color);
+    color: #000;
     font-size: 2rem;
     font-weight: 600;
     margin: 20px 0px;
 }
 
 .hero__content p {
-    color: #111;
+    color: #000;
     line-height: 20px;
 }
 
@@ -43,7 +43,7 @@
 
 .timer__count{
     background: var(--primary-color);
-    height: 250px;
+    height: 300px;
 }
 
 .timer__count img {
@@ -73,7 +73,7 @@
 
 @media only screen and (max-width: 768px){
     .hero__section {
-        background: var(--hero-bg);
+        background-color: #1ac6ff;
         background-size: cover;
         display: flex;
         align-items: center;

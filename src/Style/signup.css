@@ -1,0 +1,137 @@
+.auth__form {
+    background-color: var(--primary-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.form__group {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+input[type="file"] {
+    padding: 3px;
+    /* Mengurangi padding untuk input file */
+    font-size: 14px;
+    /* Ukuran font lebih kecil */
+}
+
+.auth__btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth__btn:hover {
+    background-color: #0056b3;
+}
+
+p {
+    margin-top: 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+
+/* For screens up to 992px */
+@media (max-width: 992px) {
+    .auth__form {
+        padding: 25px;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .auth__btn {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* For screens up to 768px */
+@media (max-width: 768px) {
+    .auth__form {
+        padding: 20px;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+        padding: 7px;
+        font-size: 13px;
+    }
+
+    .auth__btn {
+        padding: 7px;
+        font-size: 13px;
+    }
+}
+
+/* For screens up to 359px */
+@media (max-width: 359px) {
+    .auth__form {
+        padding: 15px;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .auth__btn {
+        padding: 6px;
+        font-size: 12px;
+    }
+}

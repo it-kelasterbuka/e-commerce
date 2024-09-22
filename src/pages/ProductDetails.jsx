@@ -3,7 +3,7 @@ import "../Style/product-details.css";
 
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
-import products from "../assets/data/products";
+// import products from "../assets/data/products";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import { motion } from "framer-motion";
@@ -11,8 +11,13 @@ import ProductsList from "../components/UI/ProdukList";
 import { useDispatch } from "react-redux";
 import { cartAction } from "../redux/slices/cartSlice";
 import { toast } from "react-toastify";
+import { db } from "../firebase.config";
+import { doc, getDoc } from "firebase/firestore";
+import useGetDataProduct from "../hooks/useGetDataProduct";
 
 const ProductDetails = () => {
+  // Product Set Array kosong
+  const [product, setProduct] = useState({});
   const sectionRef = useRef(null);
   const [tab, setTab] = useState("desc");
   const reviewUser = useRef("");
@@ -27,13 +32,28 @@ const ProductDetails = () => {
   }, []);
 
   const { id } = useParams();
-  const product = products.find((item) => item.id === id);
+  const { data: products } = useGetDataProduct("products");
+  const docRef = doc(db, "products", id);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const productData = docSnap.data();
+        setProduct(productData);
+      } else {
+        console.log("no product!");
+      }
+    };
+    getProduct();
+  }, [docRef]);
+
   const {
     imgUrl,
     productName,
     price,
-    avgRating,
-    reviews,
+    // avgRating,
+    // reviews,
     description,
     shortDesc,
     category,
@@ -65,6 +85,11 @@ const ProductDetails = () => {
     );
     toast.success("Product added to cart successfully");
   };
+
+  if (!Object.keys(product).length) {
+    return <p>Loading...</p>; // Atau komponen loading lainnya
+  }
+
   return (
     <Helmet>
       <CommonSection title={productName} />
@@ -111,9 +136,7 @@ const ProductDetails = () => {
                       <i class="ri-star-half-s-line"></i>
                     </motion.span>
                   </div>
-                  <p>
-                    (<span>{avgRating}</span>Ratings)
-                  </p>
+                  <p>{/* (<span>{avgRating}</span>Ratings) */}</p>
                 </div>
                 <div className="d-flex align-items-center gap-3">
                   <span className="product__price">{price}</span>
@@ -149,7 +172,7 @@ const ProductDetails = () => {
                   className={`${tab === "rev" ? "active__tab" : ""}`}
                   onClick={() => setTab("rev")}
                 >
-                  Reviews ({reviews.length})
+                  Reviews
                 </h6>
               </div>
 
@@ -160,7 +183,7 @@ const ProductDetails = () => {
               ) : (
                 <div className="product__reviews mt-3">
                   <div className="reviews__wrapper">
-                    <ul>
+                    {/* <ul>
                       {reviews?.map((item, index) => (
                         <li key={index} className="mb-2">
                           <h6>Ahmad Bedul</h6>
@@ -168,7 +191,7 @@ const ProductDetails = () => {
                           <p>{item.text}</p>
                         </li>
                       ))}
-                    </ul>
+                    </ul> */}
 
                     <div className="review__form">
                       <h4>Provide value to the product</h4>

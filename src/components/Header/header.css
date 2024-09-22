@@ -82,10 +82,41 @@
     position: relative ;
 } 
 
-.nav__icons span img {
+.nav__icons .profile img {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    border-radius: 50%;
+}
+
+.nav__icons .profile {
+    position: relative;
+    z-index: 9;
+}
+
+.nav__icons .profile .profile__action{
+    position: absolute;
+    top: 95%;
+    left: 0;
+    width: 100px;
+    z-index: 10;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    line-height: 30px;
+    display: none;
+    cursor: pointer;
+}
+
+.menu__Profile a{
+    color: #000;
+    text-decoration: none !important;
+}
+
+.show__profileAction{
+    display: block !important;
 }
 
 .mobile__menu {

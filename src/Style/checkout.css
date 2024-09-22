@@ -1,0 +1,174 @@
+.billing__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.form__group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form__group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form__group input::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+h6.mb-4.fw-bold {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.checkout__cart {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.checkout__cart h6 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #fff;
+    align-items: center;
+}
+
+.checkout__cart h4 {
+    border-top: 1px solid rgba(221, 211, 211, 0.253);
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 15px;
+    color: #fff;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.btn__place {
+    padding: 12px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn__place:hover {
+    background-color: #0056b3;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* Responsive for screen size 922px */
+@media only screen and (max-width: 922px) {
+    .billing__form {
+        padding: 15px;
+    }
+
+    .form__group input {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .checkout__cart {
+        padding: 15px;
+    }
+
+    .checkout__cart h6 {
+        font-size: 15px;
+    }
+
+    .checkout__cart h4 {
+        font-size: 17px;
+    }
+
+    .btn__place {
+        font-size: 15px;
+        padding: 10px 0;
+    }
+}
+
+/* Responsive for screen size 768px */
+@media only screen and (max-width: 768px) {
+    .billing__form {
+        padding: 12px;
+    }
+
+    .form__group input {
+        font-size: 14px;
+        padding: 9px;
+    }
+
+    .checkout__cart {
+        padding: 12px;
+        margin-top: 15px;
+    }
+
+    .checkout__cart h6 {
+        font-size: 14px;
+    }
+
+    .checkout__cart h4 {
+        font-size: 16px;
+    }
+
+    .btn__place {
+        font-size: 14px;
+        padding: 9px 0;
+    }
+}
+
+/* Responsive for screen size 359px */
+@media only screen and (max-width: 359px) {
+    .billing__form {
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    .form__group input {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .checkout__cart {
+        padding: 10px;
+    }
+
+    .checkout__cart h6 {
+        font-size: 13px;
+    }
+
+    .checkout__cart h4 {
+        font-size: 15px;
+    }
+
+    .btn__place {
+        font-size: 13px;
+        padding: 8px 0;
+    }
+}
