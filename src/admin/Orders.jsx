@@ -10,12 +10,18 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 import { toast } from "react-toastify";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState({});
+  const [modal, setModal] = useState(false);
+  const [selectedPaymentProof, setSelectedPaymentProof] = useState(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -47,6 +53,15 @@ const Orders = () => {
     );
   };
 
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const handleViewPaymentProof = (paymentProof) => {
+    setSelectedPaymentProof(paymentProof);
+    toggleModal();
+  };
+
   return (
     <Container>
       <h2 className="text-center my-4">Orders</h2>
@@ -60,6 +75,7 @@ const Orders = () => {
                 <th>Total</th>
                 <th>Status Pembayaran</th>
                 <th>Aksi</th>
+                <th>Bukti Pembayaran</th>
               </tr>
             </thead>
             <tbody>
@@ -98,12 +114,43 @@ const Orders = () => {
                       </DropdownMenu>
                     </Dropdown>
                   </td>
+                  <td>
+                    {order.paymentProof && (
+                      <button
+                        className="btn__view btn btn-warning fs-6"
+                        onClick={() =>
+                          handleViewPaymentProof(order.paymentProof)
+                        }
+                      >
+                        Bukti
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </Col>
       </Row>
+
+      {/* Modal untuk Menampilkan Bukti Pembayaran */}
+      <Modal isOpen={modal} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Bukti Pembayaran</ModalHeader>
+        <ModalBody>
+          {selectedPaymentProof && (
+            <img
+              src={selectedPaymentProof}
+              alt="Bukti Pembayaran"
+              style={{ width: "100%" }}
+            />
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-secondary" onClick={toggleModal}>
+            Tutup
+          </button>
+        </ModalFooter>
+      </Modal>
     </Container>
   );
 };

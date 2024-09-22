@@ -9,7 +9,7 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
-import { db } from "../firebase.config";
+import { db, storage } from "../firebase.config"; // Import storage dari firebase config
 import {
   collection,
   query,
@@ -18,6 +18,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import Firebase Storage API
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth"; // Pastikan jalur ini benar
 
@@ -37,7 +38,6 @@ const HistoryPembelian = () => {
         ordersCollection,
         where("email", "==", currentUser.email)
       );
-      console.log("Current User: ", currentUser);
       const orderSnapshot = await getDocs(q);
       const orderList = orderSnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -68,15 +68,22 @@ const HistoryPembelian = () => {
 
   const handleUpload = async () => {
     if (paymentProof && selectedOrder) {
-      // Simulasi upload bukti pembayaran
-      const paymentUrl = URL.createObjectURL(paymentProof); // Simulasi URL
-      const orderRef = doc(db, "orders", selectedOrder.id);
+      // Referensi untuk mengunggah ke Firebase Storage
+      const storageRef = ref(storage, `paymentProofs/${paymentProof.name}`);
 
       try {
+        // Unggah file ke Firebase Storage
+        const snapshot = await uploadBytes(storageRef, paymentProof);
+        // Dapatkan URL yang permanen dari Firebase Storage
+        const paymentUrl = await getDownloadURL(snapshot.ref);
+
+        // Update dokumen di Firestore dengan URL dari Firebase Storage
+        const orderRef = doc(db, "orders", selectedOrder.id);
         await updateDoc(orderRef, {
           paymentProof: paymentUrl,
           status: "Sudah Bayar",
         });
+
         toast.success("Pembayaran berhasil, terima kasih!");
         toggleModal();
         fetchOrders(); // Refresh order history
